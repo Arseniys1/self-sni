@@ -16,6 +16,7 @@ services:
     networks:
       - self-sni
     environment:
+      - DOMAIN=${DOMAIN:-secure-box.ru}
       - SITE_DIR=${SITE_DIR:-./sites/secure-box}
 
 networks:
