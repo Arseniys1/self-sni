@@ -11,8 +11,8 @@ services:
     volumes:
       - "${SITE_DIR:-./sites/secure-box}:/usr/share/nginx/html"
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/templates
-      - ./ssl:/etc/nginx/ssl
+      - ./nginx/conf.d:/etc/nginx/templates:ro
+      - ./ssl:/etc/nginx/ssl:ro
     networks:
       - self-sni
     environment:
