@@ -11,12 +11,15 @@ services:
     volumes:
       - "${SITE_DIR:-./sites/secure-box}:/usr/share/nginx/html"
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/templates:/etc/nginx/templates
       - ./ssl:/etc/nginx/ssl
     networks:
       - self-sni
     environment:
       - SITE_DIR=${SITE_DIR:-./sites/secure-box}
+      - DOMAIN=${DOMAIN:-secure-box.ru}
+    command: >
+      sh -c "envsubst '$$DOMAIN' < /etc/nginx/templates/default.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
 networks:
   self-sni:
