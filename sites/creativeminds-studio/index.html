@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreativeMinds Studio | Design Agency</title>
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #faf5ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: #f9fafb;
+            overflow-x: hidden;
+        }
+        
+        .site-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 2px solid var(--primary);
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 10rem 0 6rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+        }
+        
+        /* Portfolio */
+        .portfolio {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .portfolio-item {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .portfolio-image {
+            height: 250px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .portfolio-image i {
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-content h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Services */
+        .services {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-icon i {
+            color: white;
+            font-size: 1.75rem;
+        }
+        
+        /* Team */
+        .team {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 6rem 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="site-badge floating">
+        <i class="fas fa-palette"></i> CreativeMinds
+    </div>
+    
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">CreativeMinds</div>
+                <div style="display: flex; gap: 2rem;">
+                    <a href="#portfolio" style="color: var(--dark); text-decoration: none; font-weight: 500;">Work</a>
+                    <a href="#services" style="color: var(--dark); text-decoration: none; font-weight: 500;">Services</a>
+                    <a href="#team" style="color: var(--dark); text-decoration: none; font-weight: 500;">Team</a>
+                    <a href="#contact" style="color: var(--dark); text-decoration: none; font-weight: 500;">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Where Ideas Become Digital Experiences</h1>
+                <p>We craft beautiful, functional websites and applications that help businesses thrive in the digital world.</p>
+                <button style="
+                    background: white;
+                    color: var(--primary);
+                    border: none;
+                    padding: 1.25rem 3rem;
+                    border-radius: 50px;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'"
+                   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                    Start a Project
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Our Work</h2>
+                <p style="color: #6b7280; max-width: 600px; margin: 0 auto;">Showcase of our recent projects and design solutions</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(45deg, #8b5cf6, #3b82f6);">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>E-commerce Platform</h3>
+                        <p>Modern online store with advanced shopping features.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(45deg, #f59e0b, #ef4444);">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Mobile Banking App</h3>
+                        <p>Secure and intuitive banking application.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(45deg, #10b981, #0ea5e9);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Analytics Dashboard</h3>
+                        <p>Real-time data visualization platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Our Services</h2>
+                <p style="color: #6b7280;">Comprehensive design and development solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design that combines aesthetics with functionality.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Responsive websites built with modern technologies.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>Native and cross-platform mobile applications.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Branding</h3>
+                    <p>Complete brand identity and marketing materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team" id="team">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Meet Our Team</h2>
+                <p style="color: #6b7280;">Talented professionals behind every project</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Alex Morgan</h3>
+                    <p>Creative Director</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Sarah Chen</h3>
+                    <p>Lead Developer</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Marcus Lee</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Emma Wilson</h3>
+                    <p>Project Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Let's Create Together</h2>
+                    <p style="opacity: 0.9; margin-bottom: 2rem;">Have a project in mind? Get in touch with our team.</p>
+                    <div style="margin-top: 2rem;">
+                        <p><i class="fas fa-envelope"></i> hello@creativeminds.studio</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Design Street, Creative City</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 1.5rem;">Send us a Message</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" style="color: white;">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" style="color: white;">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" style="color: white;"></textarea>
+                    </div>
+                    <button style="
+                        background: var(--primary);
+                        color: white;
+                        border: none;
+                        padding: 1rem 2rem;
+                        border-radius: 10px;
+                        width: 100%;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: background 0.3s;
+                    " onmouseover="this.style.background='var(--secondary)'"
+                       onmouseout="this.style.background='var(--primary)'">
+                        Send Message
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreativeMinds Studio. All rights reserved. | Demo Website</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">Bringing creative ideas to life through design and technology.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add parallax effect to hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+
+        // Form submission
+        document.querySelector('.contact-form button').addEventListener('click', function() {
+            alert('Thank you for your message! This is a demo website.');
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.portfolio-item, .service-card, .team-member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
