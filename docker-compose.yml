@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     image: nginx:alpine
-    container_name: securebox-site
+    container_name: self-sni
     restart: unless-stopped
     ports:
       - "443:443"
@@ -14,10 +14,10 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./ssl:/etc/nginx/ssl
     networks:
-      - securebox-network
+      - self-sni
     environment:
       - SITE_DIR=${SITE_DIR:-./sites/secure-box}
 
 networks:
-  securebox-network:
+  self-sni:
     driver: bridge
