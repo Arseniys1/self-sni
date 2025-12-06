@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMasters Academy | Learn to Code Online</title>
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f5f3ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f9fafb;
+        }
+        
+        .site-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 2px solid var(--primary);
+            z-index: 1000;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 Q250,50 500,100 T1000,100 V200 H0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100px;
+            background-position: bottom;
+            background-repeat: no-repeat;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Courses */
+        .courses {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .course-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .course-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-level {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .course-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .course-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .course-features i {
+            color: var(--primary);
+        }
+        
+        /* Features */
+        .features {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 1.75rem;
+        }
+        
+        /* Stats */
+        .stats {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #6b7280;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="site-badge">
+        <i class="fas fa-laptop-code"></i> CodeMasters Academy
+    </div>
+    
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    CodeMasters
+                </div>
+                <div style="display: flex; gap: 2rem;">
+                    <a href="#courses" style="color: var(--dark); text-decoration: none; font-weight: 600;">Courses</a>
+                    <a href="#features" style="color: var(--dark); text-decoration: none; font-weight: 600;">Features</a>
+                    <a href="#testimonials" style="color: var(--dark); text-decoration: none; font-weight: 600;">Reviews</a>
+                    <a href="#contact" style="color: var(--dark); text-decoration: none; font-weight: 600;">Contact</a>
+                </div>
+                <a href="#courses" class="btn" style="color: var(--primary);">Start Learning</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Learn to Code from Industry Experts</h1>
+                <p>Master in-demand programming skills with hands-on projects, expert mentorship, and career support.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                    <a href="#courses" class="btn">Browse Courses</a>
+                    <a href="#features" class="btn" style="background: transparent; color: white;">Try Free Lesson</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="courses" id="courses">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Popular Courses</h2>
+                <p style="color: #6b7280;">Choose from our most sought-after programming courses</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Full-Stack Web Development</h3>
+                        <p>Become a professional web developer</p>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">Advanced</span>
+                        <p>Learn HTML, CSS, JavaScript, React, Node.js, and databases to build complete web applications.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 300+ hours of content</li>
+                            <li><i class="fas fa-check"></i> 15 real projects</li>
+                            <li><i class="fas fa-check"></i> Career certification</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Python & Data Science</h3>
+                        <p>Master data analysis and machine learning</p>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">Intermediate</span>
+                        <p>Learn Python programming, data analysis, visualization, and machine learning fundamentals.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 200+ hours of content</li>
+                            <li><i class="fas fa-check"></i> 10 data projects</li>
+                            <li><i class="fas fa-check"></i> Jupyter notebooks</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Mobile App Development</h3>
+                        <p>Build iOS & Android apps</p>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">All Levels</span>
+                        <p>Learn React Native to build cross-platform mobile applications for both iOS and Android.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 180+ hours of content</li>
+                            <li><i class="fas fa-check"></i> 8 mobile apps</li>
+                            <li><i class="fas fa-check"></i> App Store deployment</li>
+                        </ul>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Why Learn With Us?</h2>
+                <p style="color: #6b7280;">Our unique approach to online education</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>Video Lessons</h3>
+                    <p>High-quality video content with downloadable resources and code examples.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Hands-on Projects</h3>
+                    <p>Build real-world applications and add them to your professional portfolio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Support</h3>
+                    <p>Join our active community of learners and get help from peers and mentors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Career Certificate</h3>
+                    <p>Earn a recognized certificate to showcase your skills to employers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>Students Enrolled</p>
+                </div>
+                <div class="stat-item">
+                    <h3>120+</h3>
+                    <p>Countries</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4.8★</h3>
+                    <p>Average Rating</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Completion Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem;">Student Success Stories</h2>
+                <p style="color: #6b7280;">What our students say about their learning experience</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The Full-Stack course completely changed my career. I went from working in retail to landing a developer job in 6 months."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%;"></div>
+                        <div>
+                            <strong>Alex Johnson</strong>
+                            <p style="color: #6b7280; font-size: 0.9rem;">Junior Developer at TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a complete beginner, I was intimidated by coding. But the Python course made everything so approachable and practical."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%;"></div>
+                        <div>
+                            <strong>Maria Garcia</strong>
+                            <p style="color: #6b7280; font-size: 0.9rem;">Data Analyst Intern</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The mobile app course gave me the skills to build my own startup app. The project-based approach was exactly what I needed."
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--secondary); border-radius: 50%;"></div>
+                        <div>
+                            <strong>David Chen</strong>
+                            <p style="color: #6b7280; font-size: 0.9rem;">Startup Founder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CodeMasters Academy</h4>
+                    <p>Empowering the next generation of developers with practical, project-based learning.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#courses" style="color: rgba(255,255,255,0.8); text-decoration: none;">All Courses</a></p>
+                    <p><a href="#features" style="color: rgba(255,255,255,0.8); text-decoration: none;">Learning Paths</a></p>
+                    <p><a href="#" style="color: rgba(255,255,255,0.8); text-decoration: none;">Blog</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> hello@codemasters.academy</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon Valley</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 CodeMasters Academy. All rights reserved. | Demo Website</p>
+                <p style="margin-top: 0.5rem;">Learn to code, build your future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Course enrollment
+        document.querySelectorAll('.course-card .btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const course = this.closest('.course-card').querySelector('.course-header h3').textContent;
+                
+                // Show enrollment modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 9999;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 15px;
+                        max-width: 400px;
+                        width: 90%;
+                        text-align: center;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    ">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Enroll in ${course}</h3>
+                        <p style="color: #6b7280; margin-bottom: 1.5rem;">
+                            You are about to enroll in "${course}". In a real scenario, you would be redirected to the payment process.
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button style="
+                                background: var(--primary);
+                                color: white;
+                                border: none;
+                                padding: 0.75rem 2rem;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: background 0.3s;
+                            " onmouseover="this.style.background='var(--secondary)'"
+                               onmouseout="this.style.background='var(--primary)'">
+                                Confirm
+                            </button>
+                            <button style="
+                                background: transparent;
+                                color: var(--primary);
+                                border: 2px solid var(--primary);
+                                padding: 0.75rem 2rem;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s;
+                            " onmouseover="this.style.background='var(--primary)'; this.style.color='white'"
+                               onmouseout="this.style.background='transparent'; this.style.color='var(--primary)'">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Close modal buttons
+                const confirmBtn = modal.querySelector('button:first-child');
+                const cancelBtn = modal.querySelector('button:last-child');
+                
+                confirmBtn.addEventListener('click', function() {
+                    document.body.removeChild(modal);
+                    alert(`Enrollment successful for "${course}"! (Demo)`);
+                });
+                
+                cancelBtn.addEventListener('click', function() {
+                    document.body.removeChild(modal);
+                });
+                
+                // Close on background click
+                modal.addEventListener('click', function(e) {
+                    if(e.target === modal) {
+                        document.body.removeChild(modal);
+                    }
+                });
+            });
+        });
+
+        // Animate stats counter
+        const statNumbers = document.querySelectorAll('.stat-item h3');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const stat = entry.target;
+                    const text = stat.textContent;
+                    let targetNumber;
+                    
+                    if(text.includes('K')) {
+                        targetNumber = parseInt(text) * 1000;
+                    } else if(text.includes('★')) {
+                        targetNumber = parseFloat(text);
+                    } else if(text.includes('%')) {
+                        targetNumber = parseInt(text);
+                    } else {
+                        targetNumber = parseInt(text);
+                    }
+                    
+                    // Animate counter
+                    let current = 0;
+                    const increment = targetNumber / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if(current >= targetNumber) {
+                            clearInterval(timer);
+                            stat.textContent = text; // Original text with K, ★ or %
+                        } else {
+                            if(text.includes('%')) {
+                                stat.textContent = Math.floor(current) + '%';
+                            } else if(text.includes('★')) {
+                                stat.textContent = current.toFixed(1) + '★';
+                            } else if(text.includes('K')) {
+                                stat.textContent = Math.floor(current/1000) + 'K+';
+                            } else {
+                                stat.textContent = Math.floor(current);
+                            }
+                        }
+                    }, 30);
+                    
+                    observer.unobserve(stat);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => observer.observe(stat));
+    </script>
+</body>
+</html>
