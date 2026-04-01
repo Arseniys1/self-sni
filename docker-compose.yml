@@ -10,7 +10,7 @@ services:
       - "443:443"
       - "443:443/udp"
     environment:
-      - DOMAIN_NAME=${DOMAIN_NAME} # Передаем переменную внутрь
+      - DOMAIN=${DOMAIN} # Передаем переменную внутрь
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./${SITE_DIR}:/srv     # Используем переменную для локальной папки
