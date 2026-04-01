@@ -1,26 +1,22 @@
 version: '3.8'
 
 services:
-  web:
-    image: nginx:alpine
-    container_name: self-sni
+  caddy:
+    image: caddy:2-alpine
+    container_name: self-sni-web
     restart: unless-stopped
     ports:
-      - "443:443"
       - "80:80"
-    volumes:
-      - "${SITE_DIR:-./sites/secure-box}:/usr/share/nginx/html"
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/templates:/etc/nginx/templates
-      - ./ssl:/etc/nginx/ssl
-    networks:
-      - self-sni
+      - "443:443"
+      - "443:443/udp"
     environment:
-      - SITE_DIR=${SITE_DIR:-./sites/secure-box}
-      - DOMAIN=${DOMAIN:-secure-box.ru}
-    command: >
-      sh -c "envsubst '$$DOMAIN' < /etc/nginx/templates/default.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+      - DOMAIN_NAME=${DOMAIN_NAME} # Передаем переменную внутрь
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./${SITE_DIR}:/srv     # Используем переменную для локальной папки
+      - caddy_data:/data
+      - caddy_config:/config
 
-networks:
-  self-sni:
-    driver: bridge
+volumes:
+  caddy_data:
+  caddy_config:
